@@ -16,14 +16,14 @@
 
     "paths": {
       "@/*": ["./src/*"],
-      "~/*": ["./src/assets/*"]
-    }
+      "~/*": ["./src/assets/*"],
+    },
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.vue",
     "config/**/*.ts",
-    "types/**/*.d.ts"
-  ]
+    "types/**/*.d.ts",
+  ],
 }

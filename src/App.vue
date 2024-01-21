@@ -10,21 +10,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import axios from 'axios'
-import VueLogo from '~/vue.svg'
+import { ref } from 'vue';
+import axios from 'axios';
+import VueLogo from '~/vue.svg';
 
-const msg = ref('Response')
+const msg = ref('Response');
 const onFetchData = async () => {
   try {
-    const { data } = await axios.get('/api/')
-    msg.value = data || 'Error'
+    const { data } = await axios.get('/api/');
+    msg.value = data || 'Error';
   } catch (error) {
-    msg.value = 'Error'
+    msg.value = 'Error';
   } finally {
     setTimeout(() => {
-      msg.value = 'Response'
-    }, 1000)
+      msg.value = 'Response';
+    }, 1000);
   }
-}
+};
 </script>

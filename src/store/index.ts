@@ -1,10 +1,7 @@
-import { createPinia } from 'pinia'
-// import { useUserStore } from './modules/user'
-// import { useThemeStore } from './modules/theme'
-// import { useLocaleStore } from './modules/locale'
+import { createPinia } from 'pinia';
 
-const pinia = createPinia()
+const pinia = createPinia();
 
-// useUserStore, useThemeStore, useLocaleStore
-export {}
-export default pinia
+// import module from './modules/xxx.ts' and export it here
+export {};
+export default pinia;

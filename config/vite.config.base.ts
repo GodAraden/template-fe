@@ -1,6 +1,6 @@
-import { UserConfig, defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
+import { UserConfig, defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [vue()],
@@ -8,12 +8,12 @@ export default defineConfig({
     alias: [
       {
         find: '@',
-        replacement: resolve(__dirname, '../src')
+        replacement: resolve(__dirname, '../src'),
       },
       {
         find: '~',
-        replacement: resolve(__dirname, '../src/assets')
-      }
-    ]
-  }
-}) as UserConfig
+        replacement: resolve(__dirname, '../src/assets'),
+      },
+    ],
+  },
+}) as UserConfig;

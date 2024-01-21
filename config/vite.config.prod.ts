@@ -1,11 +1,11 @@
-import { UserConfig, mergeConfig } from 'vite'
-import baseConfig from './vite.config.base'
+import { UserConfig, mergeConfig } from 'vite';
+import baseConfig from './vite.config.base';
 
 export default mergeConfig(
   {
     mode: 'production',
     plugins: [],
-    build: {}
+    build: {},
   } as UserConfig,
-  baseConfig
-)
+  baseConfig,
+);

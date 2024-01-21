@@ -58,9 +58,9 @@ env:
 ```typescript
 // ./types/vite-env.d.ts
 interface ProxyConfig {
-  suffix: string // 表示此条规则会匹配以何种前缀开头的 api 请求
-  domain: string // api 服务所在的域名
-  path: string // 实际发送请求时会将 suffix 替换为 path
+  suffix: string; // 表示此条规则会匹配以何种前缀开头的 api 请求
+  domain: string; // api 服务所在的域名
+  path: string; // 实际发送请求时会将 suffix 替换为 path
 }
 ```
 

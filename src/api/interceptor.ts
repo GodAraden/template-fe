@@ -1,12 +1,12 @@
-import axios, { AxiosResponse, AxiosError } from 'axios'
+import axios, { AxiosResponse, AxiosError } from 'axios';
 
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;
 
-const envs = import.meta.env
-const proxies: ProxyConfig[] = []
+const envs = import.meta.env;
+const proxies: ProxyConfig[] = [];
 for (const key in envs) {
   if (key.startsWith('VITE_PROXY')) {
-    proxies.push(JSON.parse(envs[key]))
+    proxies.push(JSON.parse(envs[key]));
   }
 }
 
@@ -14,23 +14,23 @@ for (const key in envs) {
 axios.interceptors.request.use((config) => {
   if (import.meta.env.PROD) {
     for (const { suffix, domain, path } of proxies) {
-      const reg = new RegExp(suffix)
+      const reg = new RegExp(suffix);
       if (reg.test(config.url)) {
-        config.url = domain + config.url.replace(reg, path)
+        config.url = domain + config.url.replace(reg, path);
       }
     }
   }
-  return config
-})
+  return config;
+});
 
 // 拦截 response，统一处理 Http 错误
 axios.interceptors.response.use(
   async (response: AxiosResponse) => {
-    return response.data
+    return response.data;
   },
   async (error: AxiosError<any>) => {
-    return error
-  }
-)
+    return error;
+  },
+);
 
-export default axios
+export default axios;

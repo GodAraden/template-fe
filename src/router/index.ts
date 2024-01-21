@@ -2,14 +2,14 @@
 import {
   createRouter,
   createWebHistory,
-  createWebHashHistory
-} from 'vue-router'
+  createWebHashHistory,
+} from 'vue-router';
 // import { appRoutes, adminRoutes } from './routes'
-import { createRouteGuard } from './guard'
+import { createRouteGuard } from './guard';
 
 const createHistory = import.meta.env.PROD
   ? createWebHistory
-  : createWebHashHistory
+  : createWebHashHistory;
 
 const router = createRouter({
   history: createHistory(),
@@ -17,10 +17,10 @@ const router = createRouter({
     // ...appRoutes, ...adminRoutes
   ],
   scrollBehavior() {
-    return { top: 0 }
-  }
-})
+    return { top: 0 };
+  },
+});
 
-createRouteGuard(router)
+createRouteGuard(router);
 
-export { router }
+export { router };
