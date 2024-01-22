@@ -1,12 +1,19 @@
 <template>
-  <h1 class="whitespace-nowrap overflow-hidden text-ellipsis mb-4">
-    {{ msg }}
-  </h1>
-  <p class="w-72 m-auto flex justify-evenly">
-    <img src="/vite.svg" alt="Vite Logo" />
-    <img :src="VueLogo" alt="Vue Logo" />
+  <p class="mx-auto my-8 flex justify-center items-center gap-2">
+    ✌<img src="/vite.svg" alt="Vite Logo" />👉
+    <button type="button" @click="onFetchData" class="p-2 border rounded">
+      Send Request
+    </button>
+    👈<img :src="VueLogo" alt="Vue Logo" />✌
   </p>
-  <button type="button" @click="onFetchData">Request</button>
+  <div class="flex justify-center p-4">
+    <ul v-if="msg !== null">
+      <li>Response🎇🎇🎇: </li>
+      <li v-for="item in Object.entries(msg)">
+        - {{ item[0] }}: {{ item[1] }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -14,17 +21,17 @@ import { ref } from 'vue';
 import axios from 'axios';
 import VueLogo from '~/vue.svg';
 
-const msg = ref('Response');
+const msg = ref<Record<string, string>>(null);
 const onFetchData = async () => {
   try {
     const { data } = await axios.get('/api/');
-    msg.value = data || 'Error';
+    msg.value = data || null;
   } catch (error) {
-    msg.value = 'Error';
+    console.log(error);
   } finally {
     setTimeout(() => {
-      msg.value = 'Response';
-    }, 1000);
+      msg.value = null;
+    }, 5000);
   }
 };
 </script>
