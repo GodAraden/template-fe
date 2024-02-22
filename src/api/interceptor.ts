@@ -2,24 +2,7 @@ import axios, { AxiosResponse, AxiosError } from 'axios';
 
 axios.defaults.withCredentials = true;
 
-const envs = import.meta.env;
-const proxies: ProxyConfig[] = [];
-for (const key in envs) {
-  if (key.startsWith('VITE_PROXY')) {
-    proxies.push(JSON.parse(envs[key]));
-  }
-}
-
-// 拦截 request，在生产环境下替换请求的前缀
 axios.interceptors.request.use((config) => {
-  if (import.meta.env.PROD) {
-    for (const { suffix, domain, path } of proxies) {
-      const reg = new RegExp(suffix);
-      if (reg.test(config.url)) {
-        config.url = domain + config.url.replace(reg, path);
-      }
-    }
-  }
   return config;
 });
 

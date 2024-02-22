@@ -32,8 +32,8 @@ env:
 
 开发配置文件（dev）中已预置如下配置：
 
-- 开发端口配置（配置信息存储在 .env.development 文件中）
-- 服务端代理（配置信息存储在 .env.development 文件中）
+- 开发端口配置
+- 服务端代理配置
 
 生产配置文件（prod）中未预置配置，可根据需要添加如图片等静态资源压缩插件、组件库自动引入插件等
 
@@ -51,18 +51,15 @@ env:
 
 ## 环境变量
 
-项目根目录下有 `.env`、`.env.development`、`.env.production` 三个环境变量文件，主要用于存储站点的一些配置信息和基本信息，如站点 title、站点开发时运行的端口等
+项目根目录下有 `.env` 文件，主要用于存储站点的一些配置信息和基本信息，如站点标题等
 
-跨域信息配置：在 `.env.development`、`.env.production` 中均有 `VITE_PROXY_` 开头的变量，这些变量会在 开发时/打包发布时 按照规则进行解析，用于 服务端代理/请求路径重写。每个变量的后缀应标明其具体用途，如 `BECKEND`、`CAT_API`，变量是实现了如下 interface 的对象经过 json 格式化后得到的字符串：
+## 跨域处理
 
-```typescript
-// ./types/vite-env.d.ts
-interface ProxyConfig {
-  suffix: string; // 表示此条规则会匹配以何种前缀开头的 api 请求
-  domain: string; // api 服务所在的域名
-  path: string; // 实际发送请求时会将 suffix 替换为 path
-}
-```
+项目使用 **服务器代理** 的方式处理跨域问题
+
+- 开发环境下，前端项目运行在 vite 运行时的服务器上，发送的网络请求会经由 vite 处理并转发，转发规则配置参见 `config/vite.config.dev.ts`
+
+- 生产环境下，前端项目会打包生成静态页面资源包，部署到服务器后，由服务器上项目配置文件中的配置对需要处理的网络请求做转发
 
 ## Tailwind CSS
 
