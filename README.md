@@ -59,7 +59,32 @@ env:
 
 - 开发环境下，前端项目运行在 vite 运行时的服务器上，发送的网络请求会经由 vite 处理并转发，转发规则配置参见 `config/vite.config.dev.ts`
 
-- 生产环境下，前端项目会打包生成静态页面资源包，部署到服务器后，由服务器上项目配置文件中的配置对需要处理的网络请求做转发
+```typescript
+export const devConfig = defineConfig({
+  server: {
+    proxy: {
+      // 请求 /api/xxx 时命中
+      '^/api': {
+        target: 'http://localhost:8888', // 目标域
+        changeOrigin: true,
+        rewrite: (request) => request.replace(new RegExp('^/api'), '/'), // 请求 path 的重写规则
+      },
+    },
+  },
+});
+```
+
+- 生产环境下，前端项目会打包生成静态页面资源包，部署到服务器后，由服务器上项目配置文件中的配置对需要处理的网络请求做转发，如本项目在 Nginx 上的配置：
+
+```nginx
+server
+{
+    # ...
+    location /api/ { # 请求 /api/xxx 时命中
+	      proxy_pass http://template-be.araden.top/; # 重写结果中没有 /api/
+    }
+}
+```
 
 ## Tailwind CSS
 
